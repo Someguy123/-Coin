@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Chris S - AKA Someguy123
  * @version 0.01 (ALPHA!)
@@ -9,29 +10,35 @@
  * file, or it won't work.
  * 
  */
-$nmcu = array("user" => "",             // RPC Username
-            "pass" =>   "",               // RPC Password
-            "host" =>   "localhost",      // RPC Hostname/IP
-            "port" =>   8332);            // RPC Port for the daemon
+
+session_start();
+$wallets = array();
+
+$wallets['wallet 1'] = array("user" => "bitcoinrpc",  
+            "pass" =>   "password",      
+            "host" =>   "hostname",     
+            "port" =>   8332,
+	    "protocol" => "https");            
 /*
-$sqlu = array("user" => "",     // SQL Username
-            "pass" =>   "",     // SQL Password
-            "host" =>   "",     // SQL Hostname/IP Address
-            "db" =>     "");    // Database name
-**/ // You do NOT need to fill in these SQL details... this is just a placeholder for a future release.
-/** No need to change this... it's just to help you out... */
-// Check namecoin configuration
-/**
- * if(isset($nmcu['user']) && isset($nmcu['pass']) && isset($nmcu['host']) && isset($nmcu['port'])) NULL;
- * else die("You missed out a namecoin configuration option...");
- * // Check SQL configuration
- * if(isset($sqlu['user']) && isset($sqlu['pass']) && isset($sqlu['host']) && isset($sqlu['db'])) NULL;
- * else die("You missed out a MySQL configuration option");
- * /** 
- *  * NULL is just a placeholder incase you were wondering. 
- *  * Also if these sanity checks aren't working properly,
- *  * comment them out, but just remember they're for your
- *  * own good.
- *  *
- */
+$wallets['wallet 2'] = array("user" => "username",  
+            "pass" =>   "password",      
+            "host" =>   "localhost",     
+            "port" =>   5000,
+	    "protocol" => "https");            
+*/
+
+if (isset($_POST['currentWallet']))
+	$_SESSION['currentWallet'] = $_POST['currentWallet'];
+
+if (isset($_SESSION['currentWallet']))
+	$currentWallet = $_SESSION['currentWallet'];
+else
+{
+	$keys = array_keys($wallets);
+	$currentWallet = $keys[0];
+	$_SESSION['currentWallet'] = $currentWallet;
+}
+
+$nmcu = $wallets[$currentWallet];
+
 ?>
