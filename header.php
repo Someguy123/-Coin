@@ -14,18 +14,28 @@ include("jsonRPCClient.php");
  * and all the CSS.
  * 
  */
- $nmc = new jsonRPCClient("http://{$nmcu['user']}:{$nmcu['pass']}@{$nmcu['host']}:{$nmcu['port']}");
+ $nmc = new jsonRPCClient("{$nmcu['protocol']}://{$nmcu['user']}:{$nmcu['pass']}@{$nmcu['host']}:{$nmcu['port']}", true);
  try {
     $nmcinfo = $nmc->getinfo();
  } catch(exception $e) {
-    echo "Failed to retrieve data from the daemon, please check your configuration, and ensure that your coin daemon is running:  {$e}";
+    echo "Failed to retrieve data from the daemon, please check your configuration, and ensure that your coin daemon is running:<br>  {$e}";
  }
+ 
+$wallet_encrypted = true;
+ try {
+ 	$nmc->walletlock();
+ } catch(Exception $e) {
+ 	// Wallet is not encrypted
+ 	$wallet_encrypted = false;
+ }
+ 
+
  // Begin bootstrap code
  echo "<!DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
-    <title>Namecoin Web UI</title>
+    <title>Bitcoin Web UI</title>
     <meta name='description' content=''>
     <meta name='author' content=''>
 
@@ -64,18 +74,13 @@ include("jsonRPCClient.php");
                 
         }
     </style>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link href='css/bootstrap-responsive.min.css' rel='stylesheet'>
-
-    <!-- Le fav and touch icons -->
-    <link rel='shortcut icon' href='images/favicon.ico'>
-    <link rel='apple-touch-icon' href='images/apple-touch-icon.png'>
-
-    <link rel='apple-touch-icon' sizes='72x72' href='images/apple-touch-icon-72x72.png'>
-    <link rel='apple-touch-icon' sizes='114x114' href='images/apple-touch-icon-114x114.png'>
   </head>
 
   <body>
-
+    <script src='js/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
     <div class='navbar navbar-fixed-top'>
       <div class='navbar-inner'>
         <div class='container'>
@@ -85,8 +90,18 @@ include("jsonRPCClient.php");
               <li class='active'><a href='index.php'>Home</a></li>
               <li><a href='btc.php'>Transactions</a></li>
               <li><a href='address.php'>My Addresses</a></li>
+              <li><a href='addressbook.php'>Addressbook</a></li>
             </ul>
           </div><!--/.nav-collapse -->
+          
+          <span style='color: #E4E4E4;'>Select wallet server: &nbsp;</span>
+          <select id='currentWallet' onchange='window.location.href=\"index.php?currentWallet=\"+document.getElementById(\"currentWallet\").value;' style='margin-top: 5px;'>
+          	";
+ 			foreach ($wallets as $walletName => $walletData)
+ 				echo "<option id=\"".$walletName."\" ".($currentWallet == $walletName ? "selected" : "").">".$walletName."</option>";
+ 		echo "
+          </select>
+          
         </div>
       </div>
     </div>
