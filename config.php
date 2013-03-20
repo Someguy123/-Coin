@@ -15,8 +15,8 @@ session_start();
 $wallets = array();
 
 $wallets['wallet 1'] = array("user" => "bitcoinrpc",  
-            "pass" =>   "7FsGDTxAZXq9kFxS3tetGwxQd5hP6FN6FkKyQASCtHs6",      
-            "host" =>   "zbox",     
+            "pass" =>   "password",      
+            "host" =>   "hostname",     
             "port" =>   8332,
 	    "protocol" => "https");            
 /*
