@@ -54,7 +54,13 @@ You can obtain the RPC Information from:
    - ~/.litecoin/litecoin.conf
    - ~/.namecoin/bitcoin.conf
 
+**OSX**
 
+   - ~/Library/Application Support/Bitcoin/bitcoin.conf
+   - ~/Library/Application Support/Litecoin/litecoin.conf
+   - ~/Library/Application Support/Namecoin/bitcoin.conf
+
+Note: Start the RPC server: open Bitcoin-Qt.app --args -server
 
 
 DONATIONS
