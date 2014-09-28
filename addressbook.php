@@ -48,9 +48,9 @@ echo "<div class='content'>
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" name="name" /></td>
-				<td><input type="text" name="address" /></td>
-				<td><input type="submit" value="Add new address" /></td>
+				<td><input class="form-control" type="text" name="name" /></td>
+				<td><input class="form-control" type="text" name="address" /></td>
+				<td><input class="btn btn-default" type="submit" value="Add new address" /></td>
 			</tr>
 		<?php 
 		

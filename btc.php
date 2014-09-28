@@ -5,18 +5,28 @@
  * @license PUBLIC DOMAIN http://unlicense.org
  * @package +Coin - Bitcoin & forks Web Interface
  */
-ini_set("display_errors", false);
-include ("header.php");
-$trans = $nmc->listtransactions('*', 100);
-$x = array_reverse($trans);
-$bal = $nmc->getbalance("*", 6);
-$bal3 = $nmc->getbalance("*", 0);
-$bal2 = $bal - $bal3;
+
+	include ("header.php");
+	$trans = $nmc->listtransactions('*', 100);
+	$x = array_reverse($trans);
+	$bal = $nmc->getbalance("*", 6);
+	$bal3 = $nmc->getbalance("*", 0);
+	$bal2 = $bal - $bal3;
 echo "<div class='content'>
-<div class='span5'>
-<h1>Current Balance: <font color='green'>{$bal}</font></h1>
-<h2>Unconfirmed Balance: <font color='red'>{$bal2}</font></h2>
-</div><div class='span5'><a href='?orphan=1'>View Orphans</a><br /><a href='btc.php'>Go back</a></div>
+<div class=\"row\">
+	<div class='col-sm-6'>
+		<h1>Current Balance: <font color='green'>{$bal}</font></h1>
+		<h2>Unconfirmed Balance: <font color='red'>{$bal2}</font></h2>
+	</div>
+	<div class='col-sm-6'>";
+
+	if(isset($_GET['orphan']))
+		echo '<a class="btn btn-link" href="btc.php">Go back</a>';
+	else
+		echo '<a class="btn btn-link" href="?orphan=1">View Orphans</a>';
+
+echo"</div>
+</div>
 <table class='table-striped table-bordered table'>
 <thead><tr><th>Method</th><th>Address</th><th>Name</th><th>Account</th><th>Amount</th><th>Confirmations</th><th>Time</th></tr></thead>";
 
