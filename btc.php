@@ -9,8 +9,8 @@
 	include ("header.php");
 	$trans = $nmc->listtransactions('*', 100);
 	$x = array_reverse($trans);
-	$bal = $nmc->getbalance("*", 6);
-	$bal3 = $nmc->getbalance("*", 0);
+	$bal = $nmc->getbalance(null, 6);
+	$bal3 = $nmc->getbalance(null, 0);
 	$bal2 = $bal - $bal3;
 echo "<div class='content'>
 <div class=\"row\">
