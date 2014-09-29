@@ -18,7 +18,7 @@ class used by +Coin is released under the GPL v3. So please be
 aware of the restrictions if you do want to use +Coin in any
 way that may break the GPL v3 or Apache v2 licensing.
 
-Insall and Configuring
+Installing and configuring
 -----------
 
 Installation is done by downloading this repo, and placing it on a PHP web server.
@@ -31,13 +31,13 @@ system, so I recommend that you secure it with an Apache
 You should be able to simply place your RPC Information for the
 daemon you are using in **config.php**.
 
-  $wallets['wallet 1'] = array(
-    "user" => "bitcoinrpc",  
-    "pass" => "password",      
-    "host" => "hostname",     
-    "port" => 8332,
-    "protocol" => "https"
-  );
+	$wallets['wallet 1'] = array(
+		"user" => "bitcoinrpc",
+		"pass" => "password",
+		"host" => "hostname",
+		"port" => 8332,
+		"protocol" => "https"
+	);
 
 You can obtain the RPC Information from:
 
